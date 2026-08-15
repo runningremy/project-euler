@@ -2,30 +2,25 @@
 #include <unistd.h>
 #include <string.h>
 
-void rev(char* revBinary) 
+void rev(char* intBinary)
 {
-	int l = 0;
-	int r = strlen(revBinary) - 1;
-	char t;
+	char t[100];
+	int len = strlen(intBinary);
+	int i = 0;
 
-	while (l < r) {
-		t = revBinary[l];
-		revBinary[l] = revBinary[r];
-		revBinary[r] = t;
+	while (len > 0)
+		t[i++] = intBinary[len-- - 1];
+	t[i] = '\0';
 
-		l++;
-		r++;
-	}
+	strcpy(intBinary, t);
+
 }
-
-int main()
+int big(float number)
 {
-	float number = 53.14159;
 	float numerator;
 	float quotient = 1;
 	int integer, sign;
-	char revBinary[50] = "";
-	char binary;
+	char intBinary[100];
 	
 	if (number < 0)
 	{
@@ -42,20 +37,27 @@ int main()
 		quotient = numerator / 2;
 		if (quotient > (int) quotient)
 		{
-			strcat(revBinary, "1");
+			strcat(intBinary, "1");
 		} else {
-			strcat(revBinary, "0");
+			strcat(intBinary, "0");
 		}
 		numerator = (int) quotient;
 	}
 	
-	//printf("%s\n", revBinary);
-
-	rev(revBinary);
-
-	printf("%s", revBinary);
+	rev(intBinary);
+	printf("%s\n", intBinary);
 	return 0;
-	//printf("The number we are working with is %.5f.\n", number);
-	//printf("The sign is equal to %d.\n", sign);
-	//printf("The integer part of %.5f is %d.\n", number, integer);
+}
+
+int main()
+{
+	int counter = 0;
+	int test = 1;
+	while (counter < 1000000) {
+		big(test);
+		counter++;
+		test++;
+		sleep(1);
+	}
+	return 0;
 }
