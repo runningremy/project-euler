@@ -2,6 +2,23 @@
 #include <unistd.h>
 #include <string.h>
 
+int small(float number)
+{
+        int integer;
+	float fraction, product;
+	char fracBinary[100];
+	
+	
+	integer = (int) number;
+	fraction = number - integer;
+	product = fraction * 2;
+	printf("%f\n", product);
+
+
+}
+
+
+
 void rev(char* intBinary)
 {
 	char t[100];
@@ -45,19 +62,13 @@ int big(float number)
 	}
 	
 	rev(intBinary);
+	printf("%d\n", sign);
 	printf("%s\n", intBinary);
 	return 0;
 }
 
 int main()
 {
-	int counter = 0;
-	int test = 1;
-	while (counter < 1000000) {
-		big(test);
-		counter++;
-		test++;
-		sleep(1);
-	}
+	small(3.14);
 	return 0;
 }
